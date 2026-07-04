@@ -270,6 +270,19 @@ const SCHEMAS = {
       ["link_url","file","Issue PDF (upload) or paste a link"],
       ["sort","text","Sort order (1 shows first)"]],
     hint:"Upload the PDF here and it is linked automatically." },
+  pagetext: { label:"Page text", special:true, target:"text", multiline:true,
+    keys:[["home_tagline","Home: tagline under the title"],
+      ["home_intro","Home: intro paragraph"],
+      ["home_membership","Home: membership panel text"],
+      ["program_1","Home: Essay Competitions card text"],
+      ["program_2","Home: Speaker Sessions card text"],
+      ["program_3","Home: SCD Bulletin card text"],
+      ["about_1","About: first paragraph"],
+      ["about_2","About: second paragraph"],
+      ["archive_intro","Events: results archive intro"],
+      ["newsletter_intro","Newsletter: intro paragraph"],
+      ["join_intro","Join: intro paragraph"]],
+    hint:"Rewrite any paragraph to your liking. Leave a field blank to keep the standard wording. Plain text only, no dashes needed ever." },
   settings: { label:"Emails + rules", special:true,
     keys:[["contact_email","Contact email (About and Join sheets)"],
       ["join_email","Join email"],["submissions_email","Essay submissions email"],
@@ -325,18 +338,20 @@ function openTab(k){
   panel.innerHTML = `<p class="hint">${esc(s.hint||"")}</p><div id="list"></div>`;
   const list = document.getElementById("list");
   if(s.special){
-    const map = DB.settings || {};
+    const target = s.target || "settings";
+    const map = DB[target] || {};
     list.innerHTML = `<form class="aform">
-      ${s.keys.map(([key,label]) => `<label>${esc(label)}</label>
-        <input type="text" name="${key}" value="${esc(map[key]||"")}">`).join("")}
+      ${s.keys.map(([key,label]) => s.multiline
+        ? `<label>${esc(label)}</label><textarea name="${key}">${esc(map[key]||"")}</textarea>`
+        : `<label>${esc(label)}</label><input type="text" name="${key}" value="${esc(map[key]||"")}">`).join("")}
       <div class="btnrow"><button class="btn" type="submit">Save all</button></div>
       <p class="msg" id="smsg"></p></form>`;
     list.querySelector("form").onsubmit = async e => {
       e.preventDefault();
       const msg = document.getElementById("smsg"); msg.textContent="Saving"; msg.className="msg";
-      DB.settings = DB.settings || {};
-      s.keys.forEach(([key]) => DB.settings[key] = list.querySelector(`[name=${key}]`).value);
-      try{ await saveDB("settings"); msg.textContent="Saved. Live in about a minute."; msg.className="msg ok"; }
+      DB[target] = DB[target] || {};
+      s.keys.forEach(([key]) => DB[target][key] = list.querySelector(`[name=${key}]`).value);
+      try{ await saveDB(s.label); msg.textContent="Saved. Live in about a minute."; msg.className="msg ok"; }
       catch(err){ msg.textContent="Save failed: "+err.message; msg.className="msg err"; }
     };
     return;
