@@ -128,7 +128,7 @@ ol.rules li,ol.steps li{margin-bottom:10px}
   <div class="wrap">
     <p class="eyebrow">Join</p>
     <h1>Join SCD</h1>
-    <p class="lede">Two routes in. Both end with you on the member list and receiving the Bulletin.</p>
+    <p class="lede" id="t-join-intro">Two routes in. Both end with you on the member list and receiving the Bulletin.</p>
     <div class="callout"><span class="bubble" aria-hidden="true">A</span><h2>Routes</h2></div>
     <div class="cards">
       <div class="card">
@@ -185,6 +185,14 @@ async function settings(){
   const c = await content();
   return c.settings || {};
 }
+
+async function applyText(map){
+  const c = await content(); const t = c.text || {};
+  for(const [id,key] of Object.entries(map)){
+    const el = document.getElementById(id);
+    if(el && t[key] && String(t[key]).trim()) el.textContent = t[key];
+  }
+}
 const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(fallback);
 
 
@@ -193,6 +201,7 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(
   document.getElementById("join-email").innerHTML = S(st,"join_email","[join email, founders to supply]");
   document.getElementById("contact-email").innerHTML = S(st,"contact_email","[contact email, founders to supply]");
 })();
+applyText({"t-join-intro":"join_intro"});
 </script>
 </body>
 </html>
