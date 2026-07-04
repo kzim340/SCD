@@ -128,7 +128,7 @@ ol.rules li,ol.steps li{margin-bottom:10px}
   <div class="wrap">
     <p class="eyebrow">Newsletter</p>
     <h1>The SCD Bulletin</h1>
-    <p class="lede">Every issue: a market and economics update, an engineering highlight, a feature and a member spotlight. Written for members, in plain language.</p>
+    <p class="lede" id="t-news-intro">Every issue: a market and economics update, an engineering highlight, a feature and a member spotlight. Written for members, in plain language.</p>
     <div class="cols">
       <div>
         <div class="callout"><span class="bubble" aria-hidden="true">A</span><h2>Issue archive</h2></div>
@@ -175,6 +175,14 @@ async function settings(){
   const c = await content();
   return c.settings || {};
 }
+
+async function applyText(map){
+  const c = await content(); const t = c.text || {};
+  for(const [id,key] of Object.entries(map)){
+    const el = document.getElementById(id);
+    if(el && t[key] && String(t[key]).trim()) el.textContent = t[key];
+  }
+}
 const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(fallback);
 
 
@@ -193,6 +201,7 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(
       <p class="meta">Issues are listed here as they are published, newest first.</p></div></div>`;
   }
 })();
+applyText({"t-news-intro":"newsletter_intro"});
 </script>
 </body>
 </html>
