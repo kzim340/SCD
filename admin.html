@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin · Society of Capital Design</title>
+<meta name="robots" content="noindex">
+<style>
+:root{--coal:#363b3e;--brass:#b5924e;--paper:#edf0f3;--ink:#24282c;--steel:#33608f;--rule:#c7cdd3}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Liberation Sans",Arial,sans-serif;
+ color:var(--ink);background:var(--paper);line-height:1.65;font-size:16px;padding:10px;
+ background-image:linear-gradient(rgba(51,96,143,.05) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(51,96,143,.05) 1px,transparent 1px),
+  linear-gradient(rgba(51,96,143,.09) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(51,96,143,.09) 1px,transparent 1px);
+ background-size:8px 8px,8px 8px,40px 40px,40px 40px}
+.mono,.tabs a,.callout .bubble,.eyebrow,.ph,.stamp,.tb td,.boq,.panel-label,.role
+ {font-family:ui-monospace,"Cascadia Mono",Menlo,Consolas,"Liberation Mono",monospace}
+img{max-width:100%;display:block}
+a{color:inherit}
+main p a,main .meta a{color:var(--steel);text-decoration-color:var(--brass)}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0;background:var(--brass);color:#fff;padding:8px 14px;z-index:9}
+.skip:focus{left:8px}
+.sheet{width:100%;border:2px solid var(--ink);outline:1px solid var(--ink);outline-offset:4px}
+.wrap{padding:0 18px}
+@media(min-width:700px){.wrap{padding:0 40px}}
+@media(min-width:1400px){.wrap{padding:0 64px}}
+.cols{display:grid;gap:0 56px}
+@media(min-width:1000px){.cols{grid-template-columns:1fr 1fr}}
+.band{background:var(--coal);color:var(--paper);display:flex;align-items:center;gap:14px;
+ padding:12px 18px;border-bottom:2px solid var(--ink)}
+.band img{width:46px;height:46px;border-radius:50%;border:2px solid var(--brass);flex-shrink:0}
+.band .org{font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px;line-height:1.3}
+.band .sub{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
+.tabs{display:flex;overflow-x:auto;border-bottom:2px solid var(--ink);background:#fff}
+.tabs a{flex:1 0 auto;text-decoration:none;font-size:11px;letter-spacing:.1em;padding:10px 14px;
+ border-right:1px solid var(--ink);white-space:nowrap;text-transform:uppercase}
+.tabs a:last-child{border-right:none}
+.tabs a:hover{background:var(--paper)}
+.tabs a[aria-current="page"]{background:var(--brass);color:#fff;font-weight:700}
+.eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--brass);
+ font-weight:700;margin-bottom:10px}
+h1{font-size:clamp(28px,5vw,46px);text-transform:uppercase;letter-spacing:.02em;font-weight:800;line-height:1.12}
+.tagline{margin-top:10px;font-size:clamp(16px,2.4vw,19px);color:var(--steel);font-weight:600}
+.lede{max-width:62ch;margin-top:14px}
+section{padding:36px 0 8px}
+.callout{display:flex;align-items:center;gap:14px;margin:34px 0 18px}
+.callout .bubble{width:38px;height:38px;border:2px solid var(--ink);border-radius:50%;
+ display:grid;place-items:center;font-weight:700;font-size:15px;flex-shrink:0;background:#fff}
+.callout h2{font-size:clamp(18px,2.6vw,24px);text-transform:uppercase;letter-spacing:.08em;font-weight:800}
+.callout::after{content:"";flex:1;border-top:1.5px solid var(--ink);min-width:24px}
+.panel,.banner,.program,.card{border:1.5px solid var(--ink);background:#fff;padding:20px;
+ position:relative;box-shadow:5px 5px 0 rgba(54,59,62,.14);margin-top:22px}
+.panel-label{position:absolute;top:-10px;left:14px;background:#fff;border:1.5px solid var(--ink);
+ font-size:9px;letter-spacing:.18em;text-transform:uppercase;padding:2px 8px;font-weight:700}
+.cards,.leaders{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:8px}
+.card h3,.panel h3,.program h3,.archive-item h3{font-size:17px;text-transform:uppercase;
+ letter-spacing:.05em;font-weight:800;margin-bottom:8px}
+.card p,.panel p{font-size:15px}
+a.more{display:inline-block;margin-top:12px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+ font-weight:700;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--brass)}
+.ph{border:1.5px dashed var(--brass);background:rgba(181,146,78,.09);padding:0 6px;
+ font-size:.82em;color:#6f5a2a;white-space:normal}
+.stamp{display:inline-block;transform:rotate(-2deg);border:2.5px solid #6f5a2a;color:#6f5a2a;
+ text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:.12em;padding:5px 12px;margin:8px 0}
+.photobox{border:1.5px solid var(--ink);background:repeating-linear-gradient(45deg,#fff,#fff 12px,rgba(51,96,143,.05) 12px,rgba(51,96,143,.05) 24px);
+ display:grid;place-items:center;min-height:150px;margin-top:16px;padding:14px;text-align:center}
+.evphoto{margin-top:14px;border:1.5px solid var(--ink);max-height:420px;object-fit:cover}
+.boq{width:100%;border-collapse:collapse;margin-top:22px;background:#fff;font-size:14px;
+ border:1.5px solid var(--ink);box-shadow:5px 5px 0 rgba(54,59,62,.14)}
+.boq th,.boq td{border:1px solid var(--ink);padding:10px 12px;text-align:left}
+.boq th{background:var(--coal);color:var(--paper);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.boq td:first-child{width:56px;text-align:center}
+.boq td:last-child{text-align:right}
+.note{font-size:13px;color:#4a5261;margin-top:12px;max-width:60ch}
+.leader{border:1.5px solid var(--ink);background:#fff;padding:20px;text-align:center;box-shadow:5px 5px 0 rgba(54,59,62,.14)}
+.leader .headshot{width:104px;height:104px;border-radius:50%;border:1.5px dashed var(--brass);
+ background:rgba(181,146,78,.07);display:grid;place-items:center;margin:0 auto 12px;
+ font-size:10px;color:#6f5a2a;padding:6px;font-family:ui-monospace,Menlo,Consolas,monospace}
+img.headshot{border-style:solid;object-fit:cover}
+.leader h3{font-size:15px}
+.role{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#6f5a2a;font-weight:700;margin-top:6px}
+.rowlist{margin-top:20px;border:1.5px solid var(--ink);background:#fff;box-shadow:5px 5px 0 rgba(54,59,62,.14)}
+.rowitem{padding:16px 18px;border-bottom:1px solid var(--rule)}
+.rowitem:last-child{border-bottom:none}
+.rowitem strong{font-size:16px;font-weight:800}
+.rowitem .meta,.meta{font-size:14px;color:#4a5261;margin-top:3px}
+ol.rules,ol.steps{margin:14px 0 0 22px;max-width:62ch}
+ol.rules li,ol.steps li{margin-bottom:10px}
+.archive-item{border:1.5px solid var(--ink);background:#fff;padding:20px;margin-top:20px;box-shadow:5px 5px 0 rgba(54,59,62,.14)}
+.btnrow{margin-top:24px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;background:var(--brass);color:#fff;text-decoration:none;padding:12px 22px;
+ font-weight:800;letter-spacing:.1em;font-size:12px;text-transform:uppercase;border:1.5px solid var(--ink);
+ box-shadow:4px 4px 0 var(--ink);cursor:pointer}
+.btn.ghost{background:#fff;color:var(--ink)}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+@media(prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+.tb{width:100%;border-collapse:collapse;border-top:2px solid var(--ink);margin-top:44px;background:#fff}
+.tb td{border:1px solid var(--ink);padding:7px 12px;font-size:11px;letter-spacing:.08em}
+.tb .lbl{display:block;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:#6f5a2a;font-weight:700}
+.tb .val{text-transform:uppercase;font-weight:700}
+.loading{opacity:.6;font-style:italic}
+
+.adminwrap{padding:24px 18px;max-width:1100px;margin:0 auto}
+.atabs{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+.atabs button{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.1em;
+ text-transform:uppercase;padding:9px 14px;border:1.5px solid var(--ink);background:#fff;cursor:pointer}
+.atabs button.on{background:var(--brass);color:#fff;font-weight:700}
+form.aform{border:1.5px solid var(--ink);background:#fff;padding:20px;margin-top:18px;box-shadow:5px 5px 0 rgba(54,59,62,.14)}
+form.aform label{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+ color:#6f5a2a;margin:14px 0 4px;font-family:ui-monospace,Menlo,Consolas,monospace}
+form.aform input[type=text],form.aform input[type=password],form.aform textarea{
+ width:100%;padding:10px;border:1.5px solid var(--ink);font-size:15px;font-family:inherit;background:var(--paper)}
+form.aform textarea{min-height:90px}
+form.aform input[type=checkbox]{transform:scale(1.3);margin-right:8px}
+.arow{border:1.5px solid var(--ink);background:#fff;padding:14px 16px;margin-top:12px;display:flex;
+ justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap}
+.arow .t{font-weight:800}
+.arow .m{font-size:13px;color:#4a5261}
+.abtns{display:flex;gap:8px}
+.mini{font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;border:1.5px solid var(--ink);
+ background:#fff;cursor:pointer;font-weight:700}
+.mini.danger{color:#8d2f23;border-color:#8d2f23}
+.msg{margin-top:14px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+.msg.err{color:#8d2f23}.msg.ok{color:#2f6b3a}
+.hint{font-size:13px;color:#4a5261;margin-top:6px;max-width:75ch}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="band">
+    <img src="scd-logo.jpg" alt="Society of Capital Design logo">
+    <div><div class="org">SCD Admin</div><div class="sub">Founders only · saves commit to GitHub and go live in about a minute</div></div>
+  </div>
+  <div class="adminwrap">
+    <div id="login-view">
+      <h1 style="font-size:26px">Sign in</h1>
+      <p class="hint">Sign in with your GitHub access token. Only people you give a token to can edit. How to create one is in ADMIN-SETUP.txt: GitHub, Settings, Developer settings, Fine grained tokens, access to this repository only, Contents permission set to Read and write.</p>
+      <form class="aform" id="login-form" style="max-width:520px">
+        <label>GitHub access token</label>
+        <input type="password" id="li-token" autocomplete="off" required placeholder="github_pat_...">
+        <label style="display:flex;align-items:center;text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink)">
+          <input type="checkbox" id="li-remember"> Remember on this device (only tick on your own phone or laptop)</label>
+        <div class="btnrow"><button class="btn" type="submit">Sign in</button></div>
+        <p class="msg" id="login-msg"></p>
+      </form>
+    </div>
+    <div id="app-view" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+        <h2 style="font-size:26px;text-transform:uppercase;font-weight:800">Site editor</h2>
+        <div class="abtns">
+          <a class="mini" href="index.html" style="text-decoration:none">View site</a>
+          <button class="mini" id="signout">Sign out</button>
+        </div>
+      </div>
+      <p class="hint">Rules still apply: publish numbers only once verified in the Evidence Register, results only once CITABLE, names only with written permission (otherwise initials), real event photos only. Each save is one commit; the live site updates in about a minute.</p>
+      <div class="atabs" id="atabs"></div>
+      <div id="panel"></div>
+    </div>
+  </div>
+</div>
+<script src="config.js"></script>
+<script>
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const cfg = window.SCD_CONFIG;
+let token = sessionStorage.getItem("scd_token") || localStorage.getItem("scd_token") || "";
+let DB = null, SHA = null, current = "events";
+
+function b64encode(str){
+  const bytes = new TextEncoder().encode(str);
+  let bin = "";
+  for(let i=0;i<bytes.length;i+=8192) bin += String.fromCharCode.apply(null, bytes.subarray(i,i+8192));
+  return btoa(bin);
+}
+function b64decode(b64){
+  const bin = atob(b64.replace(/\s/g,""));
+  const bytes = new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) bytes[i] = bin.charCodeAt(i);
+  return new TextDecoder().decode(bytes);
+}
+async function api(path, opts={}){
+  const r = await fetch("https://api.github.com" + path, Object.assign({}, opts, {
+    headers: Object.assign({
+      "Authorization": "Bearer " + token,
+      "Accept": "application/vnd.github+json"
+    }, opts.headers || {})
+  }));
+  if(!r.ok){
+    let m = r.status + "";
+    try{ m += " " + (await r.json()).message; }catch(e){}
+    throw new Error(m);
+  }
+  return r.json();
+}
+const filePath = p => `/repos/${cfg.owner}/${cfg.repo}/contents/${p}`;
+
+async function loadDB(){
+  try{
+    const f = await api(filePath("content.json") + "?ref=" + cfg.branch);
+    SHA = f.sha;
+    DB = JSON.parse(b64decode(f.content));
+  }catch(e){
+    if(String(e.message).startsWith("404")){ DB = {settings:{}}; SHA = null; }
+    else throw e;
+  }
+}
+async function saveDB(what){
+  const body = { message: "Edit " + what + " via SCD admin",
+    content: b64encode(JSON.stringify(DB, null, 2)), branch: cfg.branch };
+  if(SHA) body.sha = SHA;
+  const res = await api(filePath("content.json"), {method:"PUT", body: JSON.stringify(body)});
+  SHA = res.content.sha;
+}
+async function uploadBinary(file, folder){
+  const buf = new Uint8Array(await file.arrayBuffer());
+  let bin = "";
+  for(let i=0;i<buf.length;i+=8192) bin += String.fromCharCode.apply(null, buf.subarray(i,i+8192));
+  const path = folder + "/" + Date.now() + "-" + file.name.replace(/[^a-zA-Z0-9._]/g,"");
+  await api(filePath(path), {method:"PUT", body: JSON.stringify({
+    message: "Upload " + path + " via SCD admin", content: btoa(bin), branch: cfg.branch })});
+  return path;
+}
+
+const SCHEMAS = {
+  events: { label:"Events", titleField:"name", sub:r=>r.date_text,
+    fields:[["name","text","Event name"],["date_text","text","Date (as it should appear)"],
+      ["venue","text","School or venue"],["description","text","Short description"],
+      ["photo_url","file","Photo (optional, real event photos only)"],
+      ["photo_alt","text","Photo description for screen readers (who, what, where)"],
+      ["is_next","check","Show as the Next Event banner on the home page"],
+      ["sort","text","Sort order (1 shows first)"]],
+    hint:"Scheduled events only. When an event has happened and is CITABLE in the Evidence Register, delete it here and add it under Results instead." },
+  cycles: { label:"Essay cycle", titleField:"name", sub:r=>r.status,
+    fields:[["name","text","Cycle name (for example Term 1 2026)"],
+      ["status","text","Status: opens, open, or closed"],
+      ["deadline_text","text","Deadline (as it should appear)"],
+      ["econ_prompts","textarea","Economics prompts (one per line)"],
+      ["eng_prompts","textarea","Engineering prompts (one per line)"],
+      ["is_current","check","This is the current cycle shown on the site"]],
+    hint:"Only one cycle should have Current ticked at a time." },
+  results: { label:"Results archive", titleField:"title", sub:r=>r.meta,
+    fields:[["title","text","Cycle or event name, track if any"],
+      ["meta","text","Month, year · Judged from N entries across N schools"],
+      ["winner","text","Winner: full name and school with written permission, otherwise initials"],
+      ["photo_url","file","Photo (optional, real event photos only)"],
+      ["photo_alt","text","Photo description for screen readers"],
+      ["sort","text","Sort order (1 shows first)"]],
+    hint:"Add a result only once its Evidence Register row is marked CITABLE." },
+  chapters: { label:"Chapters", titleField:"school", sub:r=>r.lead,
+    fields:[["school","text","School name"],
+      ["lead","text","Chapter lead (initials unless written permission for full name)"],
+      ["chartered","text","Chartered (month, year), optional"],["sort","text","Sort order"]],
+    hint:"Remember to update the School chapters quantity under Numbers when you add or remove a chapter." },
+  leaders: { label:"Leadership", titleField:"role", sub:r=>r.name,
+    fields:[["name","text","Name (with the person's permission)"],
+      ["role","text","Role (for example Co founder · Economics)"],
+      ["photo_url","file","Portrait photo (optional)"],["sort","text","Sort order"]],
+    hint:"Four roles: Co founder · Economics, Co founder · Engineering, Head of Marketing, Head of Operations." },
+  ledger: { label:"Numbers", titleField:"description", sub:r=>r.qty,
+    fields:[["description","text","Description (for example Registered members)"],
+      ["qty","text","Quantity (leave blank until verified in the Evidence Register)"],
+      ["sort","text","Sort order"]],
+    hint:"Blank quantities show as placeholders on the site. Fill a quantity only once its Evidence Register row is verified." },
+  issues: { label:"Bulletin issues", titleField:"title", sub:r=>r.date_text,
+    fields:[["title","text","Issue title (for example Issue 01: Headline)"],
+      ["date_text","text","Month, year"],
+      ["link_url","file","Issue PDF (upload) or paste a link"],
+      ["sort","text","Sort order (1 shows first)"]],
+    hint:"Upload the PDF here and it is linked automatically." },
+  settings: { label:"Emails + rules", special:true,
+    keys:[["contact_email","Contact email (About and Join sheets)"],
+      ["join_email","Join email"],["submissions_email","Essay submissions email"],
+      ["subscribe_email","Bulletin subscribe email"],
+      ["essay_word_limit","Essay word limit (for example 1500 words)"],
+      ["charter_requirements","Chapter charter requirements"]],
+    hint:"Leave a field blank to show its placeholder on the site." }
+};
+
+async function start(){
+  const login = document.getElementById("login-view"), app = document.getElementById("app-view");
+  if(!token){ login.style.display="block"; app.style.display="none"; return; }
+  try{
+    await api(`/repos/${cfg.owner}/${cfg.repo}`);
+    await loadDB();
+    login.style.display="none"; app.style.display="block";
+    renderTabs(); openTab(current);
+  }catch(e){
+    token=""; sessionStorage.removeItem("scd_token"); localStorage.removeItem("scd_token");
+    login.style.display="block"; app.style.display="none";
+    const m = document.getElementById("login-msg");
+    m.textContent = "Sign in failed: " + e.message; m.className = "msg err";
+  }
+}
+document.getElementById("login-form").addEventListener("submit", e => {
+  e.preventDefault();
+  token = document.getElementById("li-token").value.trim();
+  (document.getElementById("li-remember").checked ? localStorage : sessionStorage).setItem("scd_token", token);
+  start();
+});
+document.getElementById("signout").addEventListener("click", () => {
+  token=""; sessionStorage.removeItem("scd_token"); localStorage.removeItem("scd_token"); start();
+});
+
+function renderTabs(){
+  const t = document.getElementById("atabs");
+  t.innerHTML = Object.entries(SCHEMAS).map(([k,s]) =>
+    `<button data-k="${k}" class="${k===current?"on":""}">${s.label}</button>`).join("");
+  t.querySelectorAll("button").forEach(b => b.onclick = () => { current=b.dataset.k; renderTabs(); openTab(current); });
+}
+function fieldHTML(f, val){
+  const [key,type,label] = f;
+  if(type==="check") return `<label style="display:flex;align-items:center;text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink)">
+    <input type="checkbox" name="${key}" ${val?"checked":""}> ${esc(label)}</label>`;
+  if(type==="textarea") return `<label>${esc(label)}</label><textarea name="${key}">${esc(val||"")}</textarea>`;
+  if(type==="file") return `<label>${esc(label)}</label>
+    <input type="text" name="${key}" value="${esc(val||"")}" placeholder="Uploads fill this automatically, or paste a link">
+    <input type="file" data-target="${key}" style="margin-top:6px">`;
+  return `<label>${esc(label)}</label><input type="text" name="${key}" value="${esc(val||"")}">`;
+}
+function openTab(k){
+  const s = SCHEMAS[k], panel = document.getElementById("panel");
+  panel.innerHTML = `<p class="hint">${esc(s.hint||"")}</p><div id="list"></div>`;
+  const list = document.getElementById("list");
+  if(s.special){
+    const map = DB.settings || {};
+    list.innerHTML = `<form class="aform">
+      ${s.keys.map(([key,label]) => `<label>${esc(label)}</label>
+        <input type="text" name="${key}" value="${esc(map[key]||"")}">`).join("")}
+      <div class="btnrow"><button class="btn" type="submit">Save all</button></div>
+      <p class="msg" id="smsg"></p></form>`;
+    list.querySelector("form").onsubmit = async e => {
+      e.preventDefault();
+      const msg = document.getElementById("smsg"); msg.textContent="Saving"; msg.className="msg";
+      DB.settings = DB.settings || {};
+      s.keys.forEach(([key]) => DB.settings[key] = list.querySelector(`[name=${key}]`).value);
+      try{ await saveDB("settings"); msg.textContent="Saved. Live in about a minute."; msg.className="msg ok"; }
+      catch(err){ msg.textContent="Save failed: "+err.message; msg.className="msg err"; }
+    };
+    return;
+  }
+  const items = (DB[k]||[]).slice().sort((a,b)=>(parseInt(a.sort)||100)-(parseInt(b.sort)||100));
+  list.innerHTML = items.map(r => `<div class="arow">
+      <div><div class="t">${esc(r[s.titleField]||"(untitled)")}</div><div class="m">${esc(s.sub(r)||"")}</div></div>
+      <div class="abtns"><button class="mini" data-edit="${r.id}">Edit</button>
+      <button class="mini danger" data-del="${r.id}">Delete</button></div></div>`).join("")
+    + `<div class="btnrow"><button class="btn" id="addnew">Add new</button></div><div id="formhost"></div>`;
+
+  const showForm = row => {
+    const host = document.getElementById("formhost");
+    host.innerHTML = `<form class="aform">
+      ${s.fields.map(f => fieldHTML(f, row ? row[f[0]] : "")).join("")}
+      <div class="btnrow"><button class="btn" type="submit">${row?"Save changes":"Add"}</button>
+      <button class="btn ghost" type="button" id="cancel">Cancel</button></div>
+      <p class="msg" id="fmsg"></p></form>`;
+    const form = host.querySelector("form");
+    host.querySelector("#cancel").onclick = () => host.innerHTML = "";
+    form.querySelectorAll("input[type=file]").forEach(fi => fi.onchange = async () => {
+      const msg = form.querySelector("#fmsg");
+      if(!fi.files[0]) return;
+      msg.textContent="Uploading"; msg.className="msg";
+      try{
+        const folder = fi.files[0].type === "application/pdf" ? "bulletins" : "photos";
+        const path = await uploadBinary(fi.files[0], folder);
+        form.querySelector(`[name=${fi.dataset.target}]`).value = path;
+        msg.textContent="Uploaded"; msg.className="msg ok";
+      }catch(e){ msg.textContent="Upload failed: "+e.message; msg.className="msg err"; }
+    });
+    form.onsubmit = async e => {
+      e.preventDefault();
+      const msg = form.querySelector("#fmsg"); msg.textContent="Saving"; msg.className="msg";
+      const payload = row || { id: Date.now() };
+      s.fields.forEach(f => {
+        const el = form.querySelector(`[name=${f[0]}]`);
+        payload[f[0]] = f[1]==="check" ? el.checked : el.value;
+      });
+      if("sort" in payload) payload.sort = parseInt(payload.sort) || 100;
+      DB[k] = DB[k] || [];
+      if(!row) DB[k].push(payload);
+      try{ await saveDB(s.label); openTab(k); }
+      catch(err){ msg.textContent="Save failed: "+err.message+" (reload and retry if someone else just saved)"; msg.className="msg err"; }
+    };
+  };
+  document.getElementById("addnew").onclick = () => showForm(null);
+  list.querySelectorAll("[data-edit]").forEach(b => b.onclick = () =>
+    showForm((DB[k]||[]).find(r => String(r.id)===b.dataset.edit)));
+  list.querySelectorAll("[data-del]").forEach(b => b.onclick = async () => {
+    if(!confirm("Delete this entry? This cannot be undone.")) return;
+    DB[k] = (DB[k]||[]).filter(r => String(r.id)!==b.dataset.del);
+    try{ await saveDB(SCHEMAS[k].label); }catch(e){ alert("Delete failed: "+e.message); }
+    openTab(k);
+  });
+}
+start();
+</script>
+</body>
+</html>
