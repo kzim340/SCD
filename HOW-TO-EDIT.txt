@@ -1,0 +1,61 @@
+SOCIETY OF CAPITAL DESIGN. EDITING GUIDE.
+
+WHERE YOU EDIT
+Everything is edited at yoursite/admin.html after signing in with
+your GitHub token (see ADMIN-SETUP.txt). Only token holders can edit.
+You never touch code. Each save commits to GitHub and the live site
+updates in about a minute.
+
+THE TABS AND WHAT THEY CONTROL
+Events ............ the schedule on the Events sheet and the Next
+                    Event banner on Home (tick the banner box on
+                    exactly one event)
+Essay cycle ....... the current cycle, its prompts, status and
+                    deadline (tick current on exactly one cycle)
+Results archive ... past winning results, with optional photo
+Chapters .......... the member schools list on the About sheet
+Leadership ........ the four leader cards, names and portraits
+Numbers ........... the bill of quantities table on the About sheet
+Bulletin issues ... the issue archive, upload the PDF right there
+Emails + rules .... contact, join, submissions and subscribe emails,
+                    the essay word limit, charter requirements
+
+COMMON JOBS
+New event: Events tab, Add new, save. If it is the next one up, tick
+the banner box and untick it on the old one.
+Event happened: once its Evidence Register row is CITABLE, delete it
+from Events and add it under Results archive.
+New essay cycle: Essay cycle tab, Add new, tick current, untick the
+old one. Prompts go one per line.
+New Bulletin issue: Bulletin issues tab, Add new, tap the file button
+to upload the PDF from your phone, save.
+New chapter: Chapters tab, then update School chapters under Numbers.
+Photos: every photo field has an upload button. Real event photos
+only, never stock images. Always fill the photo description field.
+
+BLANK MEANS PLACEHOLDER
+Any field you leave blank shows on the site as a bracketed dashed
+placeholder. That is deliberate: fill a value only when it is real.
+
+THE RULES STILL APPLY IN THE EDITOR
+* Publish a number only once it is verified in the Evidence Register.
+* Publish a result only once its Register row is marked CITABLE.
+* Winner, lead and leader names: written permission first, otherwise
+  initials.
+* Judges and speakers: only wording they approved in writing.
+* Scheduled events say scheduled. Nothing is described as done until
+  it happened and is in the Register.
+
+THE CAPITAL DESIGN CHALLENGE (not on the site yet)
+Saved in challenge-section-SAVED-FOR-LATER.html for when it is
+actually scheduled.
+
+MADE A MISTAKE
+Every save is a commit. On the repo, open Commits, find the moment
+before the mistake, and restore content.json from there.
+
+BEFORE PUBLISHING CHECKLIST (every time you edit)
+[ ] Every number maps to a CITABLE Evidence Register row
+[ ] Names appear only with confirmed permission or approved wording
+[ ] Photos are real event photos with honest descriptions
+[ ] Open the site on a phone and check the sheet you changed

@@ -1,0 +1,66 @@
+SCD ADMIN PORTAL. ONE TIME SETUP.
+After this, all editing happens at your live site /admin.html from
+any phone or computer. No Supabase, no Netlify, nothing paid. Your
+GitHub repository IS the database.
+
+WHAT YOU ARE MAKING
+A personal access token: a long secret code that proves to GitHub
+that you are you. The admin page uses it to save your edits as
+commits. Whoever holds a token can edit; nobody else can. Treat it
+like a password.
+
+STEP 1. CREATE YOUR TOKEN (once per person, on github.com)
+1. Click your profile photo (top right), then Settings.
+2. Scroll to the bottom of the left sidebar: Developer settings.
+3. Personal access tokens, then Fine grained tokens, then
+   Generate new token.
+4. Name: SCD admin. Expiration: pick 90 days or set a custom date up
+   to a year (you will make a fresh one when it expires, takes a
+   minute).
+5. Repository access: choose "Only select repositories" and pick SCD.
+6. Permissions: open Repository permissions, find Contents, set it to
+   Read and write. Leave everything else alone.
+7. Generate token, then COPY it immediately (GitHub shows it once).
+   Keep it somewhere private like your password manager or notes app.
+
+STEP 2. CHECK config.js (already filled in for you)
+config.js contains your GitHub username (kzim340), the repository
+name (SCD) and the branch (main). If any of those ever change, edit
+config.js to match.
+
+STEP 3. UPLOAD AND TURN ON THE SITE
+Upload all the files to the repository (Add file, Upload files).
+Then repo Settings, Pages: Source = Deploy from a branch, Branch =
+main, folder = root, Save. Your site appears at
+https://kzim340.github.io/SCD/ within a couple of minutes.
+
+STEP 4. SIGN IN
+Go to https://kzim340.github.io/SCD/admin.html, paste your token,
+sign in. Tabs: Events, Essay cycle, Results archive, Chapters,
+Leadership, Numbers, Bulletin issues, Emails + rules. Photos and
+Bulletin PDFs upload straight from your phone with the file buttons.
+Each save is one commit; the live site updates in about a minute
+(GitHub Pages rebuild time).
+
+GIVING YOUR CO FOUNDER ACCESS
+1. Repo Settings, Collaborators, Add people, their GitHub username.
+2. They accept the invite, then do Step 1 themselves to make their
+   own token. Never share one token between people.
+
+SAFETY NOTES
+* Never paste the token into the website files or commit it anywhere.
+  It lives only in your browser when you sign in.
+* Tick "Remember on this device" only on your own phone or laptop.
+* If a token leaks, revoke it on GitHub (Developer settings, the
+  token, Delete) and make a new one. Damage limit: this repo only.
+* Every save is a commit, so every change has history. Anything can
+  be restored from the repo's Commits view.
+
+IF SOMETHING BREAKS
+Sign in fails 401: token expired or wrong, make a fresh one.
+Sign in fails 404: config.js owner or repo does not match, or your
+account lacks access to the repo.
+Save fails asking to reload: someone else saved at the same time,
+reload the page and redo the edit.
+Site shows placeholders everywhere: content.json is missing from the
+repo, upload it.

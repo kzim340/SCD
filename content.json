@@ -1,0 +1,71 @@
+{
+  "settings": {
+    "contact_email": "",
+    "join_email": "",
+    "submissions_email": "",
+    "subscribe_email": "",
+    "essay_word_limit": "",
+    "charter_requirements": ""
+  },
+  "events": [],
+  "cycles": [],
+  "results": [],
+  "chapters": [],
+  "issues": [],
+  "leaders": [
+    {
+      "id": 1,
+      "name": "",
+      "role": "Co founder \u00b7 Economics",
+      "photo_url": "",
+      "sort": 1
+    },
+    {
+      "id": 2,
+      "name": "",
+      "role": "Co founder \u00b7 Engineering",
+      "photo_url": "",
+      "sort": 2
+    },
+    {
+      "id": 3,
+      "name": "",
+      "role": "Head of Marketing",
+      "photo_url": "",
+      "sort": 3
+    },
+    {
+      "id": 4,
+      "name": "",
+      "role": "Head of Operations",
+      "photo_url": "",
+      "sort": 4
+    }
+  ],
+  "ledger": [
+    {
+      "id": 1,
+      "description": "School chapters",
+      "qty": "",
+      "sort": 1
+    },
+    {
+      "id": 2,
+      "description": "Registered members",
+      "qty": "",
+      "sort": 2
+    },
+    {
+      "id": 3,
+      "description": "Entries, latest essay cycle",
+      "qty": "",
+      "sort": 3
+    },
+    {
+      "id": 4,
+      "description": "Bulletin issues published",
+      "qty": "",
+      "sort": 4
+    }
+  ]
+}
