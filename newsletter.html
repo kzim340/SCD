@@ -149,6 +149,7 @@ ol.rules li,ol.steps li{margin-bottom:10px}
 
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const ph = s => `<span class="ph">${esc(s)}</span>`;
+const fmt = s => esc(s).replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>");
 let __content = null;
 async function content(){
   if(__content) return __content;
@@ -172,10 +173,10 @@ async function applyText(map){
   const c = await content(); const t = c.text || {};
   for(const [id,key] of Object.entries(map)){
     const el = document.getElementById(id);
-    if(el && t[key] && String(t[key]).trim()) el.textContent = t[key];
+    if(el && t[key] && String(t[key]).trim()) el.innerHTML = fmt(t[key]);
   }
 }
-const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(fallback);
+const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(fallback);
 
 
 (async () => {
@@ -183,8 +184,8 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(
   const iss = await rows("issues","sort");
   if(iss && iss.length){
     I.innerHTML = `<div class="rowlist">` + iss.map(x => `<div class="rowitem">
-      <strong>${x.link_url ? `<a href="${esc(x.link_url)}">${esc(x.title)}</a>` : esc(x.title)}</strong>
-      <p class="meta">${esc(x.date_text||"")}</p></div>`).join("") + `</div>`;
+      <strong>${x.link_url ? `<a href="${esc(x.link_url)}">${fmt(x.title)}</a>` : fmt(x.title)}</strong>
+      <p class="meta">${fmt(x.date_text||"")}</p></div>`).join("") + `</div>`;
   } else {
     I.innerHTML = `<div class="rowlist"><div class="rowitem">
       <strong>${ph("[No issues published yet, Evidence Register, Bulletin row]")}</strong>
