@@ -162,7 +162,7 @@ ol.rules li,ol.steps li{margin-bottom:10px}
     </div>
 
     <div class="callout" id="archive"><span class="bubble" aria-hidden="true">E</span><h2>Results archive</h2></div>
-    <p class="lede" style="margin-top:0">Winning results from past cycles and events. Entries appear here only once marked CITABLE in the Evidence Register. Winner names are published only with written permission.</p>
+    <p class="lede" style="margin-top:0" id="t-archive-intro">Winning results from past cycles and events. Entries appear here only once marked CITABLE in the Evidence Register. Winner names are published only with written permission.</p>
     <div id="results"><p class="loading">Loading</p></div>
   </div>
 </section>
@@ -199,6 +199,14 @@ async function rows(table){
 async function settings(){
   const c = await content();
   return c.settings || {};
+}
+
+async function applyText(map){
+  const c = await content(); const t = c.text || {};
+  for(const [id,key] of Object.entries(map)){
+    const el = document.getElementById(id);
+    if(el && t[key] && String(t[key]).trim()) el.textContent = t[key];
+  }
 }
 const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(fallback);
 
@@ -256,6 +264,7 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(
       <div class="photobox"><span class="stamp">Real event photo pending</span></div></div>`;
   }
 })();
+applyText({"t-archive-intro":"archive_intro"});
 </script>
 </body>
 </html>
