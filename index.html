@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta name="google-site-verification" content="ia4p0POHlF17BoX5rvJF3F-Zpu_6aOOYhjrtawJjvEU" /> <meta charset="utf-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Home · Society of Capital Design</title>
 <meta name="description" content="Society of Capital Design, a student founded UAE organization at the intersection of economics and engineering.">
@@ -189,6 +189,7 @@ ol.rules li,ol.steps li{margin-bottom:10px}
 
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const ph = s => `<span class="ph">${esc(s)}</span>`;
+const fmt = s => esc(s).replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>");
 let __content = null;
 async function content(){
   if(__content) return __content;
@@ -212,10 +213,10 @@ async function applyText(map){
   const c = await content(); const t = c.text || {};
   for(const [id,key] of Object.entries(map)){
     const el = document.getElementById(id);
-    if(el && t[key] && String(t[key]).trim()) el.textContent = t[key];
+    if(el && t[key] && String(t[key]).trim()) el.innerHTML = fmt(t[key]);
   }
 }
-const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(fallback);
+const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(fallback);
 
 
 (async () => {
@@ -224,8 +225,8 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(
   const next = (evs||[]).filter(e => e.is_next)[0] || (evs||[])[0];
   if(next){
     box.innerHTML = `<span class="panel-label">Scheduled</span>
-      <strong style="font-weight:800">${esc(next.name)}</strong>
-      <p class="meta">${esc(next.date_text||"")} · ${esc(next.venue||"")} · Register through your chapter lead.</p>
+      <strong style="font-weight:800">${fmt(next.name)}</strong>
+      <p class="meta">${fmt(next.date_text||"")} · ${fmt(next.venue||"")} · Register through your chapter lead.</p>
       ${next.photo_url ? `<img class="evphoto" src="${esc(next.photo_url)}" alt="${esc(next.photo_alt||next.name)}">` : ""}`;
   } else {
     box.innerHTML = `<span class="panel-label">Scheduled</span>
