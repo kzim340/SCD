@@ -130,8 +130,8 @@ ol.rules li,ol.steps li{margin-bottom:10px}
       <div>
         <p class="eyebrow">Economics × Engineering · UAE</p>
         <h1>Society of<br>Capital Design</h1>
-        <p class="tagline">where the design and the balance sheet meet.</p>
-        <p class="lede">Founded by students in 2025 and run through school chapters across the UAE. Economics students and engineering students work the same problems here, from budget caps to load limits.</p>
+        <p class="tagline" id="t-tagline">where the design and the balance sheet meet.</p>
+        <p class="lede" id="t-home-intro">Founded by students in 2025 and run through school chapters across the UAE. Economics students and engineering students work the same problems here, from budget caps to load limits.</p>
         <div class="btnrow">
           <a class="btn" href="join.html">Join SCD</a>
           <a class="btn ghost" href="events.html">Events + Competitions</a>
@@ -143,7 +143,7 @@ ol.rules li,ol.steps li{margin-bottom:10px}
         <div class="callout"><span class="bubble" aria-hidden="true">B</span><h2>Membership</h2></div>
         <div class="panel">
           <span class="panel-label">Join</span>
-          <p>Membership runs through school chapters. If your school does not have one yet, you can start it.</p>
+          <p id="t-home-membership">Membership runs through school chapters. If your school does not have one yet, you can start it.</p>
           <div class="btnrow"><a class="btn" href="join.html">Join SCD</a></div>
         </div>
       </div>
@@ -154,19 +154,19 @@ ol.rules li,ol.steps li{margin-bottom:10px}
       <div class="card">
         <span class="panel-label">Program 1</span>
         <h3>Essay Competitions</h3>
-        <p>Two tracks, Economics and Engineering, with original prompts written for each term and blind judging against a published rubric.</p>
+        <p id="t-prog1">Two tracks, Economics and Engineering, with original prompts written for each term and blind judging against a published rubric.</p>
         <a class="more" href="events.html#essays">Current cycle</a>
       </div>
       <div class="card">
         <span class="panel-label">Program 2</span>
         <h3>Speaker Sessions</h3>
-        <p>Working professionals from finance, engineering and infrastructure talk through how their fields collide in practice.</p>
+        <p id="t-prog2">Working professionals from finance, engineering and infrastructure talk through how their fields collide in practice.</p>
         <a class="more" href="events.html">Upcoming events</a>
       </div>
       <div class="card">
         <span class="panel-label">Program 3</span>
         <h3>The SCD Bulletin</h3>
-        <p>Our member newsletter. Every issue carries a market and economics update, an engineering highlight, a feature and a member spotlight.</p>
+        <p id="t-prog3">Our member newsletter. Every issue carries a market and economics update, an engineering highlight, a feature and a member spotlight.</p>
         <a class="more" href="newsletter.html">Issue archive</a>
       </div>
     </div>
@@ -207,6 +207,14 @@ async function settings(){
   const c = await content();
   return c.settings || {};
 }
+
+async function applyText(map){
+  const c = await content(); const t = c.text || {};
+  for(const [id,key] of Object.entries(map)){
+    const el = document.getElementById(id);
+    if(el && t[key] && String(t[key]).trim()) el.textContent = t[key];
+  }
+}
 const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(fallback);
 
 
@@ -225,6 +233,7 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(
       <p class="meta">${ph("[Date]")} · ${ph("[School or venue]")} · Register through your chapter lead.</p>`;
   }
 })();
+applyText({"t-tagline":"home_tagline","t-home-intro":"home_intro","t-home-membership":"home_membership","t-prog1":"program_1","t-prog2":"program_2","t-prog3":"program_3"});
 </script>
 </body>
 </html>
