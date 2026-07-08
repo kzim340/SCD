@@ -8,7 +8,17 @@
     "charter_requirements": "**15 members**"
   },
   "events": [],
-  "cycles": [],
+  "cycles": [
+    {
+      "id": 1783503878088,
+      "name": "Cycle 1 2025",
+      "status": "CLOSED",
+      "deadline_text": "31/11/2025",
+      "econ_prompts": "Pick one company that went from startup to billion dollar valuation. Explain the financial decisions that got it there and identify which single decision mattered most.\nChoose a product or service you use that appears to be free. Explain how the company behind it makes money and argue whether the user is really getting a good deal.\nChoose one financial crisis from the last 30 years. Explain what caused it, how it spread, and what one regulation introduced afterwards was designed to prevent.",
+      "eng_prompts": "Choose one engineering failure (a bridge collapse, a building fault, a product recall). Explain what went wrong technically and what should have been done differently.\nPick one material that changed an industry (carbon fibre, silicon, reinforced concrete, or another). Explain the properties that made it useful and how the industry worked before it existed.\nChoose one system that converts energy from one form to another (a power station, a car engine, a solar panel). Explain where energy is lost in the process and propose one realistic improvement.",
+      "is_current": false
+    }
+  ],
   "results": [],
   "chapters": [
     {
