@@ -126,6 +126,23 @@ form.aform input[type=checkbox]{transform:scale(1.3);margin-right:8px}
 .mini.danger{color:#8d2f23;border-color:#8d2f23}
 .msg{margin-top:14px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
 .msg.err{color:#8d2f23}.msg.ok{color:#2f6b3a}
+.preview-box{border:2px solid var(--gold);background:var(--paper);padding:18px;margin-top:14px;position:relative}
+.preview-box::before{content:"PREVIEW";position:absolute;top:-10px;left:14px;background:var(--gold);
+ color:var(--ink);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:9px;letter-spacing:.16em;
+ font-weight:700;padding:2px 8px}
+.preview-box .p-title{font-weight:800;font-size:16px;margin-bottom:4px}
+.preview-box .p-meta{font-size:14px;color:#4a5261;margin-top:3px}
+.preview-box .p-winner{margin-top:8px}
+.preview-box .p-photos{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;align-items:flex-start}
+.preview-box .p-photos img{border:1.5px solid var(--ink);height:auto;display:block}
+.preview-box .p-photos img.full{width:100%}
+.preview-box .p-photos img.half{width:48%}
+.preview-box .p-photos img.small{width:30%}
+.preview-box .p-leader{text-align:center;display:inline-block;width:140px;vertical-align:top;margin:8px}
+.preview-box .p-leader img{width:90px;height:90px;border-radius:50%;object-fit:cover;border:1.5px solid var(--ink);margin:0 auto 8px}
+.preview-box .p-role{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#6f5a2a;font-weight:700;margin-top:4px}
+.preview-box .p-row{padding:10px 0;border-bottom:1px solid #c7cdd3}
+
 .hint{font-size:13px;color:#4a5261;margin-top:6px;max-width:75ch}
 </style>
 </head>
@@ -230,6 +247,7 @@ const SCHEMAS = {
       ["venue","text","School or venue"],["description","text","Short description"],
       ["photo_url","file","Photo (optional, real event photos only)"],
       ["photo_alt","text","Photo description for screen readers (who, what, where)"],
+      ["photo_size","select","Photo size","full|Full width,half|Half width,small|Small"],
       ["is_next","check","Show as the Next Event banner on the home page"],
       ["sort","text","Sort order (1 shows first)"]],
     hint:"Scheduled events only. When an event has happened and is CITABLE in the Evidence Register, delete it here and add it under Results instead." },
@@ -247,8 +265,10 @@ const SCHEMAS = {
       ["winner","text","Winner: full name and school with written permission, otherwise initials"],
       ["photo_url","file","Photo 1 (optional, real event photos only)"],
       ["photo_alt","text","Photo 1 description for screen readers"],
+      ["photo_size","select","Photo 1 size","full|Full width,half|Half width,small|Small"],
       ["photo_url_2","file","Photo 2 (optional, second photo sits beside the first)"],
       ["photo_alt_2","text","Photo 2 description for screen readers"],
+      ["photo_size_2","select","Photo 2 size","full|Full width,half|Half width,small|Small"],
       ["sort","text","Sort order (1 shows first)"]],
     hint:"Add a result only once its Evidence Register row is marked CITABLE." },
   chapters: { label:"Chapters", titleField:"school", sub:r=>r.lead,
@@ -329,7 +349,11 @@ function fieldHTML(f, val){
   const [key,type,label] = f;
   if(type==="check") return `<label style="display:flex;align-items:center;text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink)">
     <input type="checkbox" name="${key}" ${val?"checked":""}> ${esc(label)}</label>`;
-  if(type==="textarea") return `<label>${esc(label)}</label><textarea name="${key}">${esc(val||"")}</textarea>`;
+  if(type==="select"){
+      const opts = f[3].split(",").map(o => { const [v,l] = o.split("|"); return `<option value="${v}" ${val===v?"selected":""}>${l}</option>`; });
+      return `<label>${esc(label)}</label><select name="${key}" style="width:100%;padding:10px;border:1.5px solid var(--ink);font-size:15px;background:var(--paper)">${opts.join("")}</select>`;
+    }
+    if(type==="textarea") return `<label>${esc(label)}</label><textarea name="${key}">${esc(val||"")}</textarea>`;
   if(type==="file") return `<label>${esc(label)}</label>
     <input type="text" name="${key}" value="${esc(val||"")}" placeholder="Uploads fill this automatically, or paste a link">
     <input type="file" data-target="${key}" style="margin-top:6px">`;
@@ -370,10 +394,17 @@ function openTab(k){
     host.innerHTML = `<form class="aform">
       ${s.fields.map(f => fieldHTML(f, row ? row[f[0]] : "")).join("")}
       <div class="btnrow"><button class="btn" type="submit">${row?"Save changes":"Add"}</button>
+      <button class="btn ghost" type="button" id="previewbtn">Preview</button>
       <button class="btn ghost" type="button" id="cancel">Cancel</button></div>
-      <p class="msg" id="fmsg"></p></form>`;
+      <p class="msg" id="fmsg"></p>
+      <div id="previewarea"></div></form>`;
     const form = host.querySelector("form");
     host.querySelector("#cancel").onclick = () => host.innerHTML = "";
+    host.querySelector("#previewbtn").onclick = () => {
+      const area = host.querySelector("#previewarea");
+      const html = renderPreview(k, s, form);
+      area.innerHTML = `<div class="preview-box">${html}</div>`;
+    };
     form.querySelectorAll("input[type=file]").forEach(fi => fi.onchange = async () => {
       const msg = form.querySelector("#fmsg");
       if(!fi.files[0]) return;
@@ -391,7 +422,7 @@ function openTab(k){
       const payload = row || { id: Date.now() };
       s.fields.forEach(f => {
         const el = form.querySelector(`[name=${f[0]}]`);
-        payload[f[0]] = f[1]==="check" ? el.checked : el.value;
+        payload[f[0]] = f[1]==="check" ? el.checked : (f[1]==="select" ? form.querySelector(`select[name=${f[0]}]`).value : el.value);
       });
       if("sort" in payload) payload.sort = parseInt(payload.sort) || 100;
       DB[k] = DB[k] || [];
@@ -410,6 +441,53 @@ function openTab(k){
     openTab(k);
   });
 }
+
+function renderPreview(k, s, formEl){
+  const vals = {};
+  s.fields.forEach(f => {
+    if(f[1]==="check") vals[f[0]] = formEl.querySelector(`[name=${f[0]}]`).checked;
+    else if(f[1]==="select") vals[f[0]] = formEl.querySelector(`select[name=${f[0]}]`).value;
+    else vals[f[0]] = formEl.querySelector(`[name=${f[0]}]`).value;
+  });
+  const e = s => String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const bold = s => e(s).replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>");
+  let html = "";
+
+  if(k==="results"){
+    html = `<div class="p-title">${bold(vals.title)}</div>
+      <div class="p-meta">${bold(vals.meta)}</div>
+      ${vals.winner ? `<div class="p-winner"><strong>Winner:</strong> ${bold(vals.winner)}</div>` : ""}
+      ${(vals.photo_url||vals.photo_url_2) ? `<div class="p-photos">
+        ${vals.photo_url ? `<img src="${e(vals.photo_url)}" class="${e(vals.photo_size||"full")}">` : ""}
+        ${vals.photo_url_2 ? `<img src="${e(vals.photo_url_2)}" class="${e(vals.photo_size_2||vals.photo_size||"full")}">` : ""}
+      </div>` : ""}`;
+  } else if(k==="events"){
+    html = `<div class="p-title">${bold(vals.name)}</div>
+      <div class="p-meta">${bold(vals.date_text||"")} · ${bold(vals.venue||"")} · ${bold(vals.description||"")} Status: scheduled.</div>
+      ${vals.photo_url ? `<div class="p-photos"><img src="${e(vals.photo_url)}" class="${e(vals.photo_size||"full")}"></div>` : ""}`;
+  } else if(k==="leaders"){
+    html = `<div class="p-leader">
+      ${vals.photo_url ? `<img src="${e(vals.photo_url)}">` : `<div style="width:90px;height:90px;border-radius:50%;border:1.5px dashed #b5924e;margin:0 auto 8px;display:grid;place-items:center;font-size:10px;color:#6f5a2a">[photo]</div>`}
+      <div style="font-weight:800">${vals.name ? bold(vals.name) : "[Name]"}</div>
+      <div class="p-role">${e(vals.role)}</div>
+    </div>`;
+  } else if(k==="chapters"){
+    html = `<div class="p-row"><strong>${bold(vals.school)}</strong>
+      <div class="p-meta">Chapter lead: ${bold(vals.lead)}${vals.chartered ? " · Chartered "+e(vals.chartered) : ""}</div></div>`;
+  } else if(k==="cycles"){
+    html = `<div class="p-title">${bold(vals.name)}</div>
+      <div class="p-meta">Status: ${e(vals.status)} · Deadline: ${e(vals.deadline_text)}</div>
+      ${vals.econ_prompts ? `<div style="margin-top:10px"><strong>Economics:</strong><br>${bold(vals.econ_prompts).replace(/\n/g,"<br>")}</div>` : ""}
+      ${vals.eng_prompts ? `<div style="margin-top:10px"><strong>Engineering:</strong><br>${bold(vals.eng_prompts).replace(/\n/g,"<br>")}</div>` : ""}`;
+  } else if(k==="issues"){
+    html = `<div class="p-row"><strong>${vals.link_url ? `<a href="${e(vals.link_url)}">${bold(vals.title)}</a>` : bold(vals.title)}</strong>
+      <div class="p-meta">${e(vals.date_text)}</div></div>`;
+  } else if(k==="ledger"){
+    html = `<div class="p-row"><strong>${bold(vals.description)}</strong> · ${vals.qty ? bold(vals.qty) : "<em>[placeholder until verified]</em>"}</div>`;
+  }
+  return html;
+}
+
 start();
 </script>
 </body>
