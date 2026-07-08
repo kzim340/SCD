@@ -68,7 +68,9 @@ a.more{display:inline-block;margin-top:12px;font-size:12px;letter-spacing:.14em;
  text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:.12em;padding:5px 12px;margin:8px 0}
 .photobox{border:1.5px solid var(--ink);background:repeating-linear-gradient(45deg,#fff,#fff 12px,rgba(51,96,143,.05) 12px,rgba(51,96,143,.05) 24px);
  display:grid;place-items:center;min-height:150px;margin-top:16px;padding:14px;text-align:center}
-.evphoto{margin-top:14px;border:1.5px solid var(--ink);max-height:420px;object-fit:contain;background:#f5f5f5}
+.evphoto{margin-top:14px;border:1.5px solid var(--ink);width:100%;height:auto;display:block}
+.evphoto.half{width:48%}
+.evphoto.small{width:30%}
 .boq{width:100%;border-collapse:collapse;margin-top:22px;background:#fff;font-size:14px;
  border:1.5px solid var(--ink);box-shadow:5px 5px 0 rgba(54,59,62,.14)}
 .boq th,.boq td{border:1px solid var(--ink);padding:10px 12px;text-align:left}
@@ -222,7 +224,7 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
     EL.innerHTML = `<div class="rowlist">` + evs.map(e => `<div class="rowitem">
       <strong>${fmt(e.name)}</strong>
       <p class="meta">${fmt(e.date_text||"")} · ${fmt(e.venue||"")} · ${fmt(e.description||"")} Status: scheduled.</p>
-      ${e.photo_url ? `<img class="evphoto" src="${esc(e.photo_url)}" alt="${esc(e.photo_alt||e.name)}">` : ""}
+      ${e.photo_url ? `<img class="evphoto ${esc(e.photo_size||"")}" src="${esc(e.photo_url)}" alt="${esc(e.photo_alt||e.name)}">` : ""}
       </div>`).join("") + `</div>`;
   } else {
     EL.innerHTML = `<div class="rowlist"><div class="rowitem">
@@ -256,9 +258,9 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
       <h3>${fmt(r.title)}</h3>
       <p class="meta">${fmt(r.meta||"")}</p>
       ${r.winner ? `<p style="margin-top:8px"><strong>Winner:</strong> ${fmt(r.winner)}</p>` : ""}
-      ${(r.photo_url || r.photo_url_2) ? `<div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap">
-        ${r.photo_url ? `<img class="evphoto" src="${esc(r.photo_url)}" alt="${esc(r.photo_alt||r.title)}" style="flex:1;min-width:45%;max-height:340px;object-fit:contain;margin:0;background:#f5f5f5">` : ""}
-        ${r.photo_url_2 ? `<img class="evphoto" src="${esc(r.photo_url_2)}" alt="${esc(r.photo_alt_2||r.title)}" style="flex:1;min-width:45%;max-height:340px;object-fit:contain;margin:0;background:#f5f5f5">` : ""}
+      ${(r.photo_url || r.photo_url_2) ? `<div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;align-items:flex-start">
+        ${r.photo_url ? `<img class="evphoto ${esc(r.photo_size||"")}" src="${esc(r.photo_url)}" alt="${esc(r.photo_alt||r.title)}" style="margin:0">` : ""}
+        ${r.photo_url_2 ? `<img class="evphoto ${esc(r.photo_size_2||r.photo_size||"")}" src="${esc(r.photo_url_2)}" alt="${esc(r.photo_alt_2||r.title)}" style="margin:0">` : ""}
       </div>` : ""}
       </div>`).join("");
   } else {
