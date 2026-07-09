@@ -7,7 +7,20 @@
     "essay_word_limit": "**1500**",
     "charter_requirements": "**15 members**"
   },
-  "events": [],
+  "events": [
+    {
+      "id": 1783581770890,
+      "name": "Society of Capital Design Launch",
+      "date_text": "5/10/2025",
+      "venue": "Online",
+      "description": "Students from around the world joined the official launch of SCD, where the society's vision, annual programmes, and opportunities were introduced through keynote talks and an interactive Q&A.",
+      "photo_url": "",
+      "photo_alt": "",
+      "photo_size": "full",
+      "is_next": false,
+      "sort": 100
+    }
+  ],
   "cycles": [
     {
       "id": 1783503878088,
