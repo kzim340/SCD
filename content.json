@@ -19,6 +19,18 @@
       "photo_size": "full",
       "is_next": false,
       "sort": 100
+    },
+    {
+      "id": 1783704149617,
+      "name": "Speaker Session: How Finance and Engineering Collide in Real Projects",
+      "date_text": "",
+      "venue": "",
+      "description": "",
+      "photo_url": "",
+      "photo_alt": "",
+      "photo_size": "full",
+      "is_next": false,
+      "sort": 100
     }
   ],
   "cycles": [
