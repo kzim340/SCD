@@ -315,5 +315,27 @@
     "archive_intro": "",
     "newsletter_intro": "",
     "join_intro": ""
-  }
+  },
+  "event_archive": [
+    {
+      "id": 1784532568850,
+      "title": "SCD Launch",
+      "meta": "15 November 2025, Online, 74 Students From 3 Schools",
+      "description": "The Society of Capital Design executed its official launch to formally and publicly introduce the organization and its leadership. The session detailed the core mission and explained exactly what the society does at the intersection of finance and engineering. Finally, the team presented a comprehensive overview of how the organization will benefit its student members.",
+      "speaker": "",
+      "attendance": "74",
+      "schools": "3",
+      "file_url": "",
+      "file_label": "",
+      "file_url_2": "",
+      "file_label_2": "",
+      "photo_url": "photos/1784532555222-Screenshot20260606at5.04.47PM.png",
+      "photo_alt": "",
+      "photo_size": "small",
+      "photo_url_2": "",
+      "photo_alt_2": "",
+      "photo_size_2": "full",
+      "sort": 100
+    }
+  ]
 }
