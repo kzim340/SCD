@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Home · Society of Capital Design</title>
-<meta name="description" content="Society of Capital Design, a student founded UAE organization at the intersection of economics and engineering.">
+<title>Events and Competitions · Society of Capital Design</title>
+<meta name="description" content="SCD events, essay competition cycles and the archive of past results.">
 <style>
 :root{--coal:#363b3e;--brass:#b5924e;--paper:#edf0f3;--ink:#24282c;--steel:#33608f;--rule:#c7cdd3}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -68,7 +68,9 @@ a.more{display:inline-block;margin-top:12px;font-size:12px;letter-spacing:.14em;
  text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:.12em;padding:5px 12px;margin:8px 0}
 .photobox{border:1.5px solid var(--ink);background:repeating-linear-gradient(45deg,#fff,#fff 12px,rgba(51,96,143,.05) 12px,rgba(51,96,143,.05) 24px);
  display:grid;place-items:center;min-height:150px;margin-top:16px;padding:14px;text-align:center}
-.evphoto{margin-top:14px;border:1.5px solid var(--ink);max-height:420px;object-fit:cover}
+.evphoto{margin-top:14px;border:1.5px solid var(--ink);width:100%;height:auto;display:block}
+.evphoto.half{width:48%}
+.evphoto.small{width:30%}
 .boq{width:100%;border-collapse:collapse;margin-top:22px;background:#fff;font-size:14px;
  border:1.5px solid var(--ink);box-shadow:5px 5px 0 rgba(54,59,62,.14)}
 .boq th,.boq td{border:1px solid var(--ink);padding:10px 12px;text-align:left}
@@ -90,7 +92,25 @@ img.headshot{border-style:solid;object-fit:cover}
 .rowitem .meta,.meta{font-size:14px;color:#4a5261;margin-top:3px}
 ol.rules,ol.steps{margin:14px 0 0 22px;max-width:62ch}
 ol.rules li,ol.steps li{margin-bottom:10px}
-.archive-item{border:1.5px solid var(--ink);background:#fff;padding:20px;margin-top:20px;box-shadow:5px 5px 0 rgba(54,59,62,.14)}
+
+.archive-item{border:1.5px solid var(--ink);background:#fff;padding:0;margin-top:16px;box-shadow:5px 5px 0 rgba(54,59,62,.14);overflow:hidden}
+.archive-head{padding:16px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.archive-head:hover{background:rgba(181,146,78,.06)}
+.archive-head h3{font-size:16px;text-transform:uppercase;letter-spacing:.05em;font-weight:800;margin:0}
+.archive-head .meta{font-size:14px;color:#4a5261;margin-top:3px}
+.archive-chevron{width:24px;height:24px;flex-shrink:0;transition:transform .2s;color:var(--brass)}
+.archive-item.open .archive-chevron{transform:rotate(180deg)}
+.archive-body{display:none;padding:0 18px 18px;border-top:1px solid var(--rule)}
+.archive-item.open .archive-body{display:block}
+.winner-row{padding:10px 0;border-bottom:1px solid var(--rule)}
+.winner-row:last-child{border-bottom:none}
+.winner-row strong{font-size:14px}
+.winner-row .wmeta{font-size:13px;color:#4a5261;margin-top:2px}
+.archive-files{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.archive-file{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1.5px solid var(--ink);
+ background:#fff;font-size:13px;font-weight:700;text-decoration:none;color:var(--ink)}
+.archive-file:hover{background:rgba(181,146,78,.08)}
+
 .btnrow{margin-top:24px;display:flex;gap:14px;flex-wrap:wrap}
 .btn{display:inline-block;background:var(--brass);color:#fff;text-decoration:none;padding:12px 22px;
  font-weight:800;letter-spacing:.1em;font-size:12px;text-transform:uppercase;border:1.5px solid var(--ink);
@@ -112,13 +132,13 @@ ol.rules li,ol.steps li{margin-bottom:10px}
     <img src="scd-logo.jpg" alt="Society of Capital Design logo showing the letters SCD with gears, a rising chart and a compass needle">
     <div>
       <div class="org">Society of Capital Design</div>
-      <div class="sub">Drawing set · Sheet 01 of 05</div>
+      <div class="sub">Drawing set · Sheet 03 of 05</div>
     </div>
   </div>
   <nav class="tabs" aria-label="Sheet index">
-    <a href="index.html" aria-current="page">01 Home</a>
+    <a href="index.html">01 Home</a>
     <a href="about.html">02 About</a>
-    <a href="events.html">03 Events + Competitions</a>
+    <a href="events.html" aria-current="page">03 Events + Competitions</a>
     <a href="newsletter.html">04 Newsletter</a>
     <a href="join.html">05 Join</a>
   </nav>
@@ -126,59 +146,53 @@ ol.rules li,ol.steps li{margin-bottom:10px}
 
 <section>
   <div class="wrap">
+    <p class="eyebrow">Events + Competitions</p>
+    <h1>What's on</h1>
+
     <div class="cols">
       <div>
-        <p class="eyebrow">Economics × Engineering · UAE</p>
-        <h1>Society of<br>Capital Design</h1>
-        <p class="tagline" id="t-tagline">where the design and the balance sheet meet.</p>
-        <p class="lede" id="t-home-intro">Founded by students in 2025 and run through school chapters across the UAE. Economics students and engineering students work the same problems here, from budget caps to load limits.</p>
-        <div class="btnrow">
-          <a class="btn" href="join.html">Join SCD</a>
-          <a class="btn ghost" href="events.html">Events + Competitions</a>
-        </div>
+        <div class="callout"><span class="bubble" aria-hidden="true">A</span><h2>Schedule</h2></div>
+        <div id="events-list"><div class="rowlist"><div class="rowitem"><p class="loading">Loading</p></div></div></div>
       </div>
       <div>
-        <div class="callout" style="margin-top:34px"><span class="bubble" aria-hidden="true">A</span><h2>Next event</h2></div>
-        <div class="banner" id="next-event"><p class="loading">Loading</p></div>
-        <div class="callout"><span class="bubble" aria-hidden="true">B</span><h2>Membership</h2></div>
-        <div class="panel">
-          <span class="panel-label">Join</span>
-          <p id="t-home-membership">Membership runs through school chapters. If your school does not have one yet, you can start it.</p>
-          <div class="btnrow"><a class="btn" href="join.html">Join SCD</a></div>
-        </div>
+        <div class="callout" id="essays"><span class="bubble" aria-hidden="true">B</span><h2>Current essay cycle</h2></div>
+        <div id="cycle-box"><p class="loading">Loading</p></div>
       </div>
     </div>
 
-    <div class="callout"><span class="bubble" aria-hidden="true">C</span><h2>Programs</h2></div>
-    <div class="cards">
-      <div class="card">
-        <span class="panel-label">Program 1</span>
-        <h3>Essay Competitions</h3>
-        <p id="t-prog1">Two tracks, Economics and Engineering, with original prompts written for each term and blind judging against a published rubric.</p>
-        <a class="more" href="events.html#essays">Current cycle</a>
+    <div class="cols">
+      <div>
+        <div class="callout"><span class="bubble" aria-hidden="true">C</span><h2>Rules</h2></div>
+        <ol class="rules">
+          <li>Original work only. Sources must be cited. Any AI assistance must be disclosed on the cover page.</li>
+          <li>One entry per student per track. You may enter both tracks.</li>
+          <li>Word limit: <span id="word-limit"></span>, excluding references.</li>
+          <li>Entries are scored out of 50.</li>
+        </ol>
       </div>
-      <div class="card">
-        <span class="panel-label">Program 2</span>
-        <h3>Speaker Sessions</h3>
-        <p id="t-prog2">Working professionals from finance, engineering and infrastructure talk through how their fields collide in practice.</p>
-        <a class="more" href="events.html">Upcoming events</a>
-      </div>
-      <div class="card">
-        <span class="panel-label">Program 3</span>
-        <h3>The SCD Bulletin</h3>
-        <p id="t-prog3">Our member newsletter. Every issue carries a market and economics update, an engineering highlight, a feature and a member spotlight.</p>
-        <a class="more" href="newsletter.html">Issue archive</a>
+      <div>
+        <div class="callout"><span class="bubble" aria-hidden="true">D</span><h2>How to enter</h2></div>
+        <ol class="steps">
+          <li>Submit through your chapter lead, or directly to <span id="sub-email"></span>.</li>
+          <li>Subject line: <em>Essay, [Track], [School]</em>. Attach one PDF.</li>
+          <li>You will receive a confirmation of receipt from a founder or chapter lead.</li>
+        </ol>
       </div>
     </div>
-    <p style="margin-top:20px;font-size:15px">Meet the team and see our chapters on the <a href="about.html"><strong>About sheet</strong></a>.</p>
+
+    <div class="callout" id="archive"><span class="bubble" aria-hidden="true">E</span><h2>Competition results</h2></div>
+    <p class="lede" style="margin-top:0" id="t-archive-intro">Winning results from past cycles and events.</p>
+    <div id="results"><p class="loading">Loading</p></div>
+    <h2 class="sheetidx" style="margin-top:36px">Event archive</h2>
+    <div id="eventarchive"><p class="loading">Loading</p></div>
   </div>
 </section>
 
     <div class="wrap">
       <table class="tb" aria-label="Title block">
         <tr>
-          <td><span class="lbl">Sheet title</span><span class="val">General arrangement</span></td>
-          <td><span class="lbl">Sheet</span><span class="val">01 / 05</span></td>
+          <td><span class="lbl">Sheet title</span><span class="val">Events + competitions</span></td>
+          <td><span class="lbl">Sheet</span><span class="val">03 / 05</span></td>
           <td><span class="lbl">Organization</span><span class="val">Society of Capital Design · Founded 2025 · UAE</span></td>
         </tr>
       </table>
@@ -220,22 +234,124 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
 
 
 (async () => {
-  const box = document.getElementById("next-event");
+  const st = await settings();
+  document.getElementById("word-limit").innerHTML = S(st,"essay_word_limit","[N words, founders to confirm]");
+  document.getElementById("sub-email").innerHTML = S(st,"submissions_email","[submissions email, founders to supply]");
+
+  const EL = document.getElementById("events-list");
   const evs = await rows("events","sort");
-  const next = (evs||[]).filter(e => e.is_next)[0] || (evs||[])[0];
-  if(next){
-    box.innerHTML = `<span class="panel-label">Scheduled</span>
-      <strong style="font-weight:800">${fmt(next.name)}</strong>
-      <p class="meta">${fmt(next.date_text||"")} · ${fmt(next.venue||"")} · Register through your chapter lead.</p>
-      ${next.poster_url ? `<img src="${esc(next.poster_url)}" alt="${esc(next.poster_alt||next.name+' poster')}" style="max-width:300px;height:auto;margin-top:14px;display:block;border:1.5px solid var(--ink)">` : ""}
-      ${next.photo_url ? `<img class="evphoto" src="${esc(next.photo_url)}" alt="${esc(next.photo_alt||next.name)}">` : ""}`;
+  if(evs && evs.length){
+    EL.innerHTML = evs.map(e => `<div class="archive-item">
+      <div class="archive-head" onclick="this.parentElement.classList.toggle('open')">
+        <div>
+          <h3>${fmt(e.name)}</h3>
+          <p class="meta">${fmt(e.date_text||"")} · ${fmt(e.venue||"")} · ${fmt(e.description||"")} Status: scheduled.</p>
+        </div>
+        <svg class="archive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="archive-body">
+        ${e.poster_url ? `<img src="${esc(e.poster_url)}" alt="${esc(e.poster_alt||e.name+' poster')}" style="max-width:400px;height:auto;margin-top:8px;display:block;border:1.5px solid var(--ink)">` : ""}
+        ${e.photo_url ? `<img class="evphoto ${esc(e.photo_size||"")}" src="${esc(e.photo_url)}" alt="${esc(e.photo_alt||e.name)}" style="margin-top:12px">` : ""}
+      </div>
+    </div>`).join("");
   } else {
-    box.innerHTML = `<span class="panel-label">Scheduled</span>
-      <strong style="font-weight:800">${ph("[Event name, Evidence Register, Events row]")}</strong>
-      <p class="meta">${ph("[Date]")} · ${ph("[School or venue]")} · Register through your chapter lead.</p>`;
+    EL.innerHTML = `<div class="rowlist"><div class="rowitem">
+      <strong>${ph("[No events listed yet, Evidence Register, Events rows]")}</strong>
+      <p class="meta">Scheduled events are listed as scheduled. Completed events move to the archive once marked CITABLE.</p></div></div>`;
   }
+
+  const CB = document.getElementById("cycle-box");
+  const cycles = await rows("cycles","id");
+  const cur = (cycles||[]).filter(c => c.is_current)[0];
+  if(cur){
+    CB.innerHTML = `<div class="banner"><span class="panel-label">Cycle</span>
+      <strong style="font-weight:800">${fmt(cur.name)}</strong>
+      <p class="meta">Status: ${fmt(cur.status||"")} · Deadline: ${fmt(cur.deadline_text||"")}</p></div>
+      <div class="program"><span class="panel-label">Track 1</span><h3>Economics</h3>
+      <p>${cur.econ_prompts && cur.econ_prompts.trim() ? fmt(cur.econ_prompts).replace(/\n/g,"<br>") : ph("[Prompts published here when the cycle opens]")}</p></div>
+      <div class="program"><span class="panel-label">Track 2</span><h3>Engineering</h3>
+      <p>${cur.eng_prompts && cur.eng_prompts.trim() ? fmt(cur.eng_prompts).replace(/\n/g,"<br>") : ph("[Prompts published here when the cycle opens]")}</p></div>`;
+  } else {
+    CB.innerHTML = `<div class="banner"><span class="panel-label">Cycle</span>
+      <strong style="font-weight:800">${ph("[Term or cycle name, founders]")}</strong>
+      <p class="meta">Status: ${ph("[opens / open / closed]")} · Deadline: ${ph("[Date, Evidence Register, Essay Cycle row]")}</p></div>
+      <div class="program"><span class="panel-label">Track 1</span><h3>Economics</h3><p>${ph("[Prompts published here when the cycle opens]")}</p></div>
+      <div class="program"><span class="panel-label">Track 2</span><h3>Engineering</h3><p>${ph("[Prompts published here when the cycle opens]")}</p></div>`;
+  }
+
+  const R = document.getElementById("results");
+  const res = await rows("results","sort");
+  if(res && res.length){
+    R.innerHTML = res.map((r,i) => {
+      const winners = (r.winners||r.winner||"").split("\n").filter(w=>w.trim());
+      const files = [];
+      if(r.file_url) files.push({url:r.file_url, name:r.file_label||"View document"});
+      if(r.file_url_2) files.push({url:r.file_url_2, name:r.file_label_2||"View document"});
+      if(r.file_url_3) files.push({url:r.file_url_3, name:r.file_label_3||"View document"});
+      const photos = [];
+      if(r.photo_url) photos.push({url:r.photo_url, alt:r.photo_alt||r.title, size:r.photo_size||""});
+      if(r.photo_url_2) photos.push({url:r.photo_url_2, alt:r.photo_alt_2||r.title, size:r.photo_size_2||""});
+      return `<div class="archive-item" data-idx="${i}">
+        <div class="archive-head" onclick="this.parentElement.classList.toggle('open')">
+          <div>
+            <h3>${fmt(r.title)}</h3>
+            <p class="meta">${fmt(r.meta||"")}</p>
+          </div>
+          <svg class="archive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="archive-body">
+          ${winners.length ? `<div style="margin-top:4px">${winners.map(w => {
+            const parts = w.split("|");
+            return `<div class="winner-row"><strong>${fmt(parts[0])}</strong>${parts[1] ? `<div class="wmeta">${fmt(parts[1])}</div>` : ""}</div>`;
+          }).join("")}</div>` : ""}
+          ${photos.length ? `<div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;align-items:flex-start">
+            ${photos.map(p => `<img class="evphoto ${esc(p.size)}" src="${esc(p.url)}" alt="${esc(p.alt)}" style="margin:0">`).join("")}
+          </div>` : ""}
+          ${files.length ? `<div class="archive-files">${files.map(f =>
+            `<a class="archive-file" href="${esc(f.url)}" target="_blank">${fmt(f.name)}</a>`).join("")}</div>` : ""}
+        </div>
+      </div>`;
+    }).join("");
+  } else {
+    R.innerHTML = `<div class="archive-item"><h3>${ph("[No results citable yet]")}</h3>
+      <p class="meta">The first cycle's results will appear here once its Evidence Register row is marked CITABLE.</p>
+      <div class="photobox"><span class="stamp">Real event photo pending</span></div></div>`;
+  }
+  // Event archive
+  const EA = document.getElementById("eventarchive");
+  const ea = await rows("event_archive","sort");
+  if(ea && ea.length){
+    EA.innerHTML = ea.map((r,i) => {
+      const files = [];
+      if(r.file_url) files.push({url:r.file_url, name:r.file_label||"View document"});
+      if(r.file_url_2) files.push({url:r.file_url_2, name:r.file_label_2||"View document"});
+      const photos = [];
+      if(r.photo_url) photos.push({url:r.photo_url, alt:r.photo_alt||r.title, size:r.photo_size||""});
+      if(r.photo_url_2) photos.push({url:r.photo_url_2, alt:r.photo_alt_2||r.title, size:r.photo_size_2||""});
+      return `<div class="archive-item" data-idx="ea${i}">
+        <div class="archive-head" onclick="this.parentElement.classList.toggle('open')">
+          <div>
+            <h3>${fmt(r.title)}</h3>
+            <p class="meta">${fmt(r.meta||"")}</p>
+          </div>
+          <svg class="archive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="archive-body">
+          ${r.description ? `<p style="margin-top:8px">${fmt(r.description)}</p>` : ""}
+          ${r.speaker ? `<p style="margin-top:8px"><strong>Speaker:</strong> ${fmt(r.speaker)}</p>` : ""}
+          ${r.attendance ? `<p style="margin-top:4px"><strong>Attendance:</strong> ${esc(r.attendance)} students${r.schools ? " from "+esc(r.schools)+" schools" : ""}</p>` : ""}
+          ${photos.length ? `<div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;align-items:flex-start">
+            ${photos.map(p => `<img class="evphoto ${esc(p.size)}" src="${esc(p.url)}" alt="${esc(p.alt)}" style="margin:0">`).join("")}
+          </div>` : ""}
+          ${files.length ? `<div class="archive-files">${files.map(f =>
+            `<a class="archive-file" href="${esc(f.url)}" target="_blank">${fmt(f.name)}</a>`).join("")}</div>` : ""}
+        </div>
+      </div>`;
+    }).join("");
+  } else { EA.innerHTML = '<p class="meta">No past events archived yet.</p>'; }
+
 })();
-applyText({"t-tagline":"home_tagline","t-home-intro":"home_intro","t-home-membership":"home_membership","t-prog1":"program_1","t-prog2":"program_2","t-prog3":"program_3"});
+applyText({"t-archive-intro":"archive_intro"});
 </script>
 </body>
 </html>
