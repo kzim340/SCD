@@ -244,7 +244,7 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
     EL.innerHTML = `<div class="rowlist">` + evs.map(e => `<div class="rowitem">
       <strong>${fmt(e.name)}</strong>
       <p class="meta">${fmt(e.date_text||"")} · ${fmt(e.venue||"")} · ${fmt(e.description||"")} Status: scheduled.</p>
-      ${(e.poster_url ? `<img class="evphoto" src="${esc(e.poster_url)}" alt="${esc(e.poster_alt||e.name+' poster')}" style="max-width:340px;height:auto;margin-top:14px;display:block"") +
+      ${(e.poster_url ? `<img class="evphoto" src="${esc(e.poster_url)}" alt="${esc(e.poster_alt||e.name+' poster')}"style="width:100%;height:auto;margin-top:14px"") +
       (e.photo_url ? `<img class="evphoto ${esc(e.photo_size||"")}" src="${esc(e.photo_url)}" alt="${esc(e.photo_alt||e.name)}">` : "")}
       </div>`).join("") + `</div>`;
   } else {
