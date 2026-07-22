@@ -180,6 +180,7 @@ ol.rules li,ol.steps li{margin-bottom:10px}
       </div>
     </div>
 
+    <div class="callout" id="archive"><span class="bubble" aria-hidden="true">E</span><h2>Results archive</h2></div>
     <div class="callout" id="archive"><span class="bubble" aria-hidden="true">E</span><h2>Competition results</h2></div>
     <p class="lede" style="margin-top:0" id="t-archive-intro">Winning results from past cycles and events.</p>
     <div id="results"><p class="loading">Loading</p></div>
@@ -244,7 +245,8 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
     EL.innerHTML = `<div class="rowlist">` + evs.map(e => `<div class="rowitem">
       <strong>${fmt(e.name)}</strong>
       <p class="meta">${fmt(e.date_text||"")} · ${fmt(e.venue||"")} · ${fmt(e.description||"")} Status: scheduled.</p>
-      ${(e.poster_url ? `<img class="evphoto" src="${esc(e.poster_url)}" alt="${esc(e.poster_alt||e.name+' poster')}"style="width:100%;height:auto;margin-top:14px"") +
+      ${e.photo_url ? `<img class="evphoto ${esc(e.photo_size||"")}" src="${esc(e.photo_url)}" alt="${esc(e.photo_alt||e.name)}">` : ""}
+      ${(e.poster_url ? `<img class="evphoto" src="${esc(e.poster_url)}" alt="${esc(e.poster_alt||e.name+' poster')}" style="width:100%;height:auto;margin-top:14px">` : "") +
       (e.photo_url ? `<img class="evphoto ${esc(e.photo_size||"")}" src="${esc(e.photo_url)}" alt="${esc(e.photo_alt||e.name)}">` : "")}
       </div>`).join("") + `</div>`;
   } else {
