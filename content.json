@@ -45,6 +45,19 @@
       "photo_size": "full",
       "is_next": false,
       "sort": 100
+    },
+    {
+      "id": 1784703833578,
+      "name": "The Capital Design Challenge",
+      "date_text": "March 2026",
+      "venue": "Online",
+      "description": "SCD's flagship inter-school competition. Teams of three to four, each with at least one economics and one engineering member, receive a real infrastructure case set in the Gulf region and must design a solution, cost it within a capped budget, and deliver a video pitch. After submissions close, all teams join a live session where an unseen budget change is revealed. Thirty minutes to adapt, three minutes to present, one follow up question from judges. The current case is the Al Reem District Problem, with an AED 40 million capital budget.",
+      "poster_url": "",
+      "photo_url": "",
+      "photo_alt": "",
+      "photo_size": "full",
+      "is_next": true,
+      "sort": 100
     }
   ],
   "cycles": [
