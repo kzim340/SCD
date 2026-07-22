@@ -336,6 +336,26 @@
       "photo_alt_2": "",
       "photo_size_2": "full",
       "sort": 100
+    },
+    {
+      "id": 1784702022440,
+      "title": "Speaker Session: Financial Due Diligence and Valuations",
+      "meta": "Janurary 2026, Online",
+      "description": "Aneeza Haidar, CEO of RMB Group, delivered a session on how investors verify a company's financials before committing capital and the three standard methods used to value a business. The session covered quality of earnings analysis, red flags in financial statements, and included a case study on the Wirecard collapse. A Q&A followed.",
+      "speaker": "Aneeza Haidar, CEO of RMB Group",
+      "attendance": "121",
+      "schools": "6",
+      "file_url": "",
+      "file_label": "Speaker Slides",
+      "file_url_2": "",
+      "file_label_2": "",
+      "photo_url": "",
+      "photo_alt": "",
+      "photo_size": "full",
+      "photo_url_2": "photos/1784702014075-Screenshot20260606at5.04.47PM.png",
+      "photo_alt_2": "",
+      "photo_size_2": "small",
+      "sort": 100
     }
   ]
 }
